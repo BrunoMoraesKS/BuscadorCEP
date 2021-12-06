@@ -1,25 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { GlobalStyle } from "./global/GlobalStyles";
+import * as S from "./styles";
+
+import Home from "./pages/Home";
+import SearchCEP from "./pages/SearchCEP";
+import SearchAddress from "./pages/SearchAddress";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <S.Container>
+      <GlobalStyle />
+      <Router>
+        <Header />
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route exact path="/searchAddress">
+            <SearchAddress />
+          </Route>
+          <Route exact path="/searchCep" component={SearchCEP} />
+        </Switch>
+        <Footer />
+      </Router>
+    </S.Container>
   );
 }
 
