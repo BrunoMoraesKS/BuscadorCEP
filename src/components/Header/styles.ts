@@ -6,4 +6,8 @@ export const Container = styled.header`
   align-items: center;
   gap: 0 32px;
   width: 100%;
+
+  @media print {
+    display: none;
+  }
 `;

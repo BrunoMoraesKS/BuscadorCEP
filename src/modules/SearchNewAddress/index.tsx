@@ -6,14 +6,16 @@ import SeparatorLine from "../../components/SeparatorLine";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { AnyObject } from "yup/lib/object";
+import Title from "../../components/Title";
 
-interface ISearchNewCEPProps {
-  showModule: "SearchNewCEP" | "SearchCEPResult";
-  setShowModule: (showModule: "SearchNewCEP" | "SearchCEPResult") => void;
-  cep: string;
+interface ISearchNewAddressProps {
+  setShowModule: (
+    showModule: "SearchNewAddress" | "SearchAddressResult"
+  ) => void;
   setCep: (cep: string) => void;
+  errorMessage: string;
 }
 
 const schema = yup.object().shape({
@@ -26,12 +28,11 @@ const schema = yup.object().shape({
 
 const cepPattern = "99999-999";
 
-const SearchNewCEP = ({
-  showModule,
+const SearchNewAddress = ({
   setShowModule,
-  cep,
   setCep,
-}: ISearchNewCEPProps) => {
+  errorMessage,
+}: ISearchNewAddressProps) => {
   const history = useHistory();
   const {
     handleSubmit,
@@ -45,12 +46,21 @@ const SearchNewCEP = ({
   const onSubmit = (data: AnyObject) => {
     setCep(getValues("cep"));
 
-    setShowModule("SearchCEPResult");
+    setShowModule("SearchAddressResult");
   };
 
   return (
     <S.Container>
       <SeparatorLine />
+
+      <S.BreadCrumb>
+        <Link to="/">
+          <Title content="Início" size={0.75} variant="h4" />
+        </Link>
+        <S.BreadCrumbArrow>&gt;</S.BreadCrumbArrow>
+        <S.BreadCrumbResult>Buscar Endereço</S.BreadCrumbResult>
+      </S.BreadCrumb>
+
       <S.Form>
         <Controller
           control={control}
@@ -69,7 +79,9 @@ const SearchNewCEP = ({
           defaultValue=""
         />
 
-        <S.Error>{errors.cep?.message ?? ""}</S.Error>
+        <S.Error>
+          {errors.cep?.message ? errors.cep?.message : errorMessage}
+        </S.Error>
 
         <S.ButtonsContainer>
           <Button
@@ -77,6 +89,7 @@ const SearchNewCEP = ({
               history.push("/");
             }}
             variant="secondary"
+            type="button"
           >
             Voltar
           </Button>
@@ -90,4 +103,4 @@ const SearchNewCEP = ({
   );
 };
 
-export default SearchNewCEP;
+export default SearchNewAddress;

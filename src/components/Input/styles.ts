@@ -10,6 +10,16 @@ export const Container = styled.div`
 
 export const Input = styled.input`
   padding: 8px 12px;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  &[type="number"] {
+    -moz-appearance: textfield;
+  }
 `;
 
 export const Label = styled.label`

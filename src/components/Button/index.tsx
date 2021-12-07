@@ -1,15 +1,15 @@
 import React from "react";
 import * as S from "./styles";
 
-interface IButtonProps {
+interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   onClick: () => void;
   children: React.ReactNode;
   variant: "primary" | "secondary";
 }
 
-const Button = ({ onClick, children, variant }: IButtonProps) => {
+const Button = ({ onClick, children, variant, ...rest }: IButtonProps) => {
   return (
-    <S.Button variant={variant} onClick={onClick}>
+    <S.Button variant={variant} onClick={onClick} {...rest}>
       {children}
     </S.Button>
   );

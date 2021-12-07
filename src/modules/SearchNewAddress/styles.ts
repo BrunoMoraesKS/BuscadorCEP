@@ -17,3 +17,22 @@ export const ButtonsContainer = styled.div`
 export const Error = styled.span`
   color: ${Colors.tertiary};
 `;
+
+export const BreadCrumb = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 0.3rem;
+
+  margin-bottom: 24px;
+`;
+
+export const BreadCrumbResult = styled.h4`
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: ${Colors.paragraph};
+`;
+
+export const BreadCrumbArrow = styled.span`
+  font-size: 0.65rem;
+`;
