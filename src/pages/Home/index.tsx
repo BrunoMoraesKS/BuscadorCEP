@@ -1,11 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import * as S from "./styles";
 import SeparatorLine from "../../components/SeparatorLine";
 import Title from "../../components/Title";
 import Button from "../../components/Button";
 
 const Home = () => {
+  const history = useHistory();
   return (
     <S.Container>
       <SeparatorLine />
@@ -23,17 +24,23 @@ const Home = () => {
       </S.WelcomeText>
 
       <S.ButtonsContainer>
-        <Link to="searchAddress">
-          <Button variant="primary" onClick={() => {}}>
-            Buscar Endereço
-          </Button>
-        </Link>
+        <Button
+          variant="primary"
+          onClick={() => {
+            history.push("searchAddress");
+          }}
+        >
+          Buscar Endereço
+        </Button>
 
-        <Link to="searchCep">
-          <Button variant="primary" onClick={() => {}}>
-            Buscar Cep
-          </Button>
-        </Link>
+        <Button
+          variant="primary"
+          onClick={() => {
+            history.push("searchCep");
+          }}
+        >
+          Buscar Cep
+        </Button>
       </S.ButtonsContainer>
 
       <SeparatorLine />

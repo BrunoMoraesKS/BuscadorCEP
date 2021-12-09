@@ -2,7 +2,7 @@ import React from "react";
 import * as S from "./styles";
 
 interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  onClick: () => void;
+  onClick: (e?: any) => void;
   children: React.ReactNode;
   variant: "primary" | "secondary";
 }

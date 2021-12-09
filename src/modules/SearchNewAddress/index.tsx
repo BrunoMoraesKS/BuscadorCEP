@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import * as S from "./styles";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
@@ -6,17 +5,12 @@ import SeparatorLine from "../../components/SeparatorLine";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { AnyObject } from "yup/lib/object";
 import Title from "../../components/Title";
+import { useSearchAddressContext } from "../../contexts/SearchAddressContext";
 
-interface ISearchNewAddressProps {
-  setShowModule: (
-    showModule: "SearchNewAddress" | "SearchAddressResult"
-  ) => void;
-  setCep: (cep: string) => void;
-  errorMessage: string;
-}
+interface ISearchNewAddressProps {}
 
 const schema = yup.object().shape({
   cep: yup
@@ -26,14 +20,11 @@ const schema = yup.object().shape({
     .required("Digite o CEP."),
 });
 
-const cepPattern = "99999-999";
-
-const SearchNewAddress = ({
-  setShowModule,
-  setCep,
-  errorMessage,
-}: ISearchNewAddressProps) => {
+const SearchNewAddress = ({}: ISearchNewAddressProps) => {
   const history = useHistory();
+
+  const { setShowModule, setCep, errorMessage } = useSearchAddressContext();
+
   const {
     handleSubmit,
     control,
@@ -54,9 +45,16 @@ const SearchNewAddress = ({
       <SeparatorLine />
 
       <S.BreadCrumb>
-        <Link to="/">
-          <Title content="Início" size={0.75} variant="h4" />
-        </Link>
+        <Title
+          content="Início"
+          size={0.75}
+          variant="h4"
+          onClick={() => {
+            history.push("/");
+          }}
+          decoration="link"
+        />
+
         <S.BreadCrumbArrow>&gt;</S.BreadCrumbArrow>
         <S.BreadCrumbResult>Buscar Endereço</S.BreadCrumbResult>
       </S.BreadCrumb>
@@ -73,6 +71,7 @@ const SearchNewAddress = ({
               name="cep"
               onChange={onChange}
               type="number"
+              data-testid="cepInput"
             />
           )}
           name="cep"

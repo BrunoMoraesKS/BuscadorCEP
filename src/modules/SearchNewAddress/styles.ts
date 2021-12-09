@@ -9,9 +9,11 @@ export const ButtonsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
 
-  gap: 16px;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 325px;
 
-  margin-top: 32px;
+  margin-top: 48px;
 `;
 
 export const Error = styled.span`

@@ -10,6 +10,8 @@ export const Container = styled.div`
 
 export const Input = styled.input`
   padding: 8px 12px;
+  width: 100%;
+  max-width: 325px;
 
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
@@ -19,6 +21,10 @@ export const Input = styled.input`
 
   &[type="number"] {
     -moz-appearance: textfield;
+  }
+
+  &:focus {
+    outline-color: ${Colors.highlight};
   }
 `;
 

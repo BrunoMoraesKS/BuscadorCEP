@@ -1,37 +1,20 @@
 import { useState, useEffect } from "react";
 import * as S from "./styles";
 import axios from "axios";
+
 import LoadingSpinner from "../../components/LoadingSpinner";
 import SearchNewAddress from "../../modules/SearchNewAddress";
 import SearchAddressResult from "../../modules/SearchAddressResult";
 
-export interface ICEPData {
-  cep: number;
-  logradouro?: string;
-  complemento?: string;
-  bairro?: string;
-  localidade: string;
-  uf: string;
-  ibge: number;
-  gia: number;
-  ddd: number;
-  siafi: number;
-  erro?: boolean;
-}
+import { ICEPResponse } from "../../interfaces/SearchAddress";
 
-interface ICEPResponse {
-  data: ICEPData;
-  status: number;
-}
+import { useSearchAddressContext } from "../../contexts/SearchAddressContext";
 
 const SearchAddress = () => {
-  const [showModule, setShowModule] = useState("SearchNewAddress");
-  const [cep, setCep] = useState("");
-  const [data, setData] = useState({} as ICEPData);
-  const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const axios = require("axios");
+  const { showModule, setShowModule, cep, setData, setErrorMessage } =
+    useSearchAddressContext();
 
   const handleError = () => {
     setErrorMessage("CEP não encontrado, tente novamente!");
@@ -62,21 +45,10 @@ const SearchAddress = () => {
         </S.LoadingScreen>
       )}
 
-      {showModule === "SearchNewAddress" && !loading && (
-        <SearchNewAddress
-          setShowModule={setShowModule}
-          setCep={setCep}
-          errorMessage={errorMessage}
-        />
-      )}
+      {showModule === "SearchNewAddress" && !loading && <SearchNewAddress />}
 
       {showModule === "SearchAddressResult" && !loading && (
-        <SearchAddressResult
-          setShowModule={setShowModule}
-          data={data}
-          setErrorMessage={setErrorMessage}
-          cep={cep}
-        />
+        <SearchAddressResult />
       )}
     </>
   );

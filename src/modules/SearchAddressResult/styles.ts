@@ -6,10 +6,12 @@ export const Container = styled.div``;
 export const ButtonsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
 
-  gap: 16px;
+  width: 100%;
+  max-width: 325px;
 
-  margin-top: 40px;
+  margin-top: 48px;
 
   @media print {
     display: none;

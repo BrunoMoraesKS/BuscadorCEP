@@ -2,6 +2,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { GlobalStyle } from "./global/GlobalStyles";
 import * as S from "./styles";
 
+import SearchAddressContextProvider from "./contexts/SearchAddressContext";
+
 import Home from "./pages/Home";
 import SearchCEP from "./pages/SearchCEP";
 import SearchAddress from "./pages/SearchAddress";
@@ -12,16 +14,23 @@ function App() {
   return (
     <S.Container>
       <GlobalStyle />
+
       <Router>
         <Header />
         <Switch>
           <Route exact path="/">
             <Home />
           </Route>
+
           <Route exact path="/searchAddress">
-            <SearchAddress />
+            <SearchAddressContextProvider>
+              <SearchAddress />
+            </SearchAddressContextProvider>
           </Route>
-          <Route exact path="/searchCep" component={SearchCEP} />
+
+          <Route exact path="/searchCep">
+            <SearchCEP />
+          </Route>
         </Switch>
         <Footer />
       </Router>

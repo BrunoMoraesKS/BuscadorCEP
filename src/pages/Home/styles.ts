@@ -16,5 +16,9 @@ export const WelcomeText = styled.p`
 export const ButtonsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 325px;
+
+  margin-top: 24px;
 `;
