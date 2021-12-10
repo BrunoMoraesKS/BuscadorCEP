@@ -12,7 +12,7 @@ const Navigation = () => {
         content="Buscar Endereço"
         variant="h3"
         onClick={() => {
-          history.push("/searchAddress");
+          history.push("/buscarEndereco");
         }}
         decoration="link"
       />
@@ -22,7 +22,7 @@ const Navigation = () => {
         content="Buscar CEP"
         variant="h3"
         onClick={() => {
-          history.push("/searchCep");
+          history.push("/buscarCep");
         }}
         decoration="link"
       />

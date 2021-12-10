@@ -6,6 +6,7 @@ import Input from "../../components/Input";
 import Button from "../../components/Button";
 import Title from "../../components/Title";
 import { useSearchAddressContext } from "../../contexts/SearchAddressContext";
+import Breadcrumber from "../../components/Breadcrumber";
 
 interface ISearchAddressResultsProps {}
 
@@ -23,33 +24,22 @@ const SearchAddressResult = ({}: ISearchAddressResultsProps) => {
     <S.Container>
       <SeparatorLine />
 
-      <S.BreadCrumb>
-        <Title
-          content="Início"
-          size={0.75}
-          variant="h4"
-          onClick={() => {
-            history.push("/");
-          }}
-          decoration="link"
-        />
-        <S.BreadCrumbArrow>&gt;</S.BreadCrumbArrow>
-
-        <Title
-          content="Buscar Endereço"
-          size={0.75}
-          variant="h4"
-          decoration="link"
-          onClick={() => {
-            setShowModule("SearchNewAddress");
-            setErrorMessage("");
-          }}
-        />
-
-        <S.BreadCrumbArrow>&gt;</S.BreadCrumbArrow>
-
-        <S.BreadCrumbResult>Resultado - CEP {cep}</S.BreadCrumbResult>
-      </S.BreadCrumb>
+      <Breadcrumber
+        data={[
+          {
+            title: "Início",
+            link: "/",
+          },
+          {
+            title: "Buscar Endereço",
+            link: "/buscarEndereco",
+          },
+          {
+            title: `Resultado - CEP ${cep}`,
+            link: ".",
+          },
+        ]}
+      />
 
       <S.Form>
         <Input

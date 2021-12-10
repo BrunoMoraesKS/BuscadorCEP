@@ -3,6 +3,7 @@ import { Colors } from "../../global/GlobalStyles";
 
 interface IButtonProps {
   variant: "primary" | "secondary";
+  disabled?: boolean;
 }
 
 export const Button = styled.button<IButtonProps>`
@@ -13,8 +14,9 @@ export const Button = styled.button<IButtonProps>`
 
   background-color: ${(props) =>
     props.variant === "primary" ? `${Colors.button}` : "transparent"};
+
   color: ${(props) =>
     props.variant === "primary" ? `${Colors.buttonText}` : `${Colors.button}`};
 
-  cursor: pointer;
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
 `;

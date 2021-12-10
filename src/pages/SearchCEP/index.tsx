@@ -8,8 +8,10 @@ import { useHistory } from "react-router-dom";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import Select from "../../components/Select";
+import CepCard from "../../components/CepCard";
+import Breadcrumber from "../../components/Breadcrumber";
 import { IStateData, ICityData, ICEPData } from "../../interfaces/SearchCEP";
-import { ICEPResponse } from "../../interfaces/SearchAddress";
+import LoadingScreen from "../../components/LoadingScreen";
 
 interface IData {
   id: number;
@@ -18,17 +20,22 @@ interface IData {
 
 const SearchCEP = () => {
   const history = useHistory();
-  const [loading, setLoading] = useState(false);
+
+  const [loading, setLoading] = useState(true);
+  const [showResultModal, setShowResultModal] = useState(false);
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
+
+  const [cepData, setCepData] = useState<ICEPData[]>([]);
+
   const [selectedState, setSelectedState] = useState("");
   const [stateData, setStateData] = useState<IData[]>([]);
+
   const [selectedCity, setSelectedCity] = useState("");
   const [cityData, setCityData] = useState<IData[]>([]);
-  const [logradouro, setLogradouro] = useState("");
-  const [cepData, setCepData] = useState({} as ICEPData);
-  const [showResultModal, setShowResultModal] = useState(false);
   const [isCityDisabled, setIsCityDisabled] = useState(true);
+
+  const [selectedStreet, setSelectedStreet] = useState("");
   const [isStreetDisabled, setIsStreetDisabled] = useState(true);
-  const [showErrorMessage, setShowErrorMessage] = useState(false);
 
   useEffect(() => {
     const makeStateRequest = async () => {
@@ -42,7 +49,6 @@ const SearchCEP = () => {
       setStateData(data);
       setLoading(false);
     };
-
     makeStateRequest();
   }, []);
 
@@ -59,7 +65,6 @@ const SearchCEP = () => {
       setCityData(data);
       setLoading(false);
     };
-
     makeCityRequest();
 
     selectedState && selectedState !== "0"
@@ -69,22 +74,29 @@ const SearchCEP = () => {
 
   const makeCEPRequest = async () => {
     setLoading(true);
+
     const response = await axios.get<ICEPData[]>(
-      `https:viacep.com.br/ws/${selectedState}/${selectedCity}/${logradouro}/json/
-        `
+      `
+      https://viacep.com.br/ws/${selectedState}/${selectedCity}/${selectedStreet.replace(
+        /\s+/g,
+        "+"
+      )}/json/
+      `
     );
     const data = response.data.map((item) => {
       return item;
     });
-    response.data.length > 0 ? handleSuccess(data[0]) : handleErrorMessage();
+
+    response.data.length > 0 ? handleSuccess(data) : handleError();
 
     setLoading(false);
   };
 
-  const handleErrorMessage = () => {
+  const handleError = () => {
     setShowErrorMessage(true);
+    setCepData([]);
   };
-  const handleSuccess = (data: ICEPData) => {
+  const handleSuccess = (data: ICEPData[]) => {
     setCepData(data);
     setShowResultModal(true);
     setShowErrorMessage(false);
@@ -94,115 +106,102 @@ const SearchCEP = () => {
     selectedCity && selectedCity !== "0"
       ? setIsStreetDisabled(false)
       : setIsStreetDisabled(true);
+    setCepData([]);
   }, [selectedCity]);
 
   useEffect(() => {}, [selectedState]);
 
   return (
-    <S.Container>
-      <SeparatorLine />
-      <S.BreadCrumb>
-        <Title
-          content="Início"
-          size={0.75}
-          variant="h4"
-          onClick={() => {
-            history.push("/");
-          }}
-          decoration="link"
-        />
-        <S.BreadCrumbArrow>&gt;</S.BreadCrumbArrow>
-        <S.BreadCrumbResult>Buscar CEP</S.BreadCrumbResult>
-      </S.BreadCrumb>
+    <>
+      {loading && <LoadingScreen />}
 
-      <S.Form>
-        <Select
-          data={stateData}
-          label="Estado"
-          onChange={(e: any) => {
-            setSelectedState(e.target.value);
-          }}
+      <S.Container>
+        <SeparatorLine />
+
+        <Breadcrumber
+          data={[
+            {
+              title: "Início",
+              link: "/",
+            },
+            {
+              title: "Buscar CEP",
+              link: ".",
+            },
+          ]}
         />
 
-        <Select
-          data={cityData}
-          label="Cidade"
-          onChange={(e: any) => {
-            setSelectedCity(e.target.value);
-          }}
-          disabled={isCityDisabled}
-        />
-
-        <Input
-          label="Logradouro"
-          placeholder="Digite o logradouro..."
-          onChange={(e) => {
-            setLogradouro(e.target.value);
-          }}
-          disabled={isStreetDisabled}
-        />
-
-        {showErrorMessage && (
-          <S.ErrorMessage>Logradouro inválido.</S.ErrorMessage>
-        )}
-
-        <S.ButtonsContainer>
-          <Button type="button" onClick={() => {}} variant="secondary">
-            Voltar
-          </Button>
-
-          <Button
-            onClick={(e) => {
-              e.preventDefault();
-              makeCEPRequest();
+        <S.Form>
+          <Select
+            data={stateData}
+            label="Estado"
+            onChange={(e: any) => {
+              setSelectedState(e.target.value);
             }}
-            variant="primary"
-          >
-            Pesquisar
-          </Button>
-        </S.ButtonsContainer>
-      </S.Form>
-      <SeparatorLine />
+          />
 
-      {showResultModal && (
-        <S.SearchResultModalOuterContainer>
-          <S.SearchResultModal>
-            <S.ModalResultTextContainer>
-              <Title content="CEP:" size={1.5} />
-              <S.ModalResultText>{cepData.cep}</S.ModalResultText>
-            </S.ModalResultTextContainer>
+          <Select
+            data={cityData}
+            label="Cidade"
+            onChange={(e: any) => {
+              setSelectedCity(e.target.value);
+            }}
+            disabled={isCityDisabled}
+          />
 
-            {/* <S.ModalResultTextContainer>
-              <Title content="Código do logradouro:" size={1.5} />
-              <S.ModalResultText>{cepData.cep}</S.ModalResultText>
-            </S.ModalResultTextContainer> */}
+          <Input
+            label="Logradouro"
+            placeholder="Digite o logradouro..."
+            onChange={(e) => {
+              setSelectedStreet(e.target.value);
+            }}
+            disabled={isStreetDisabled}
+          />
 
-            <S.ModalResultTextContainer>
-              <Title content="Município:" size={1.5} />
-              <S.ModalResultText>{cepData.localidade}</S.ModalResultText>
-            </S.ModalResultTextContainer>
+          {showErrorMessage && (
+            <S.ErrorMessage>Logradouro inválido.</S.ErrorMessage>
+          )}
 
-            {cepData.logradouro && (
-              <S.ModalResultTextContainer>
-                <Title content="Logradouro:" size={1.5} />
-                <S.ModalResultText>{cepData.logradouro}</S.ModalResultText>
-              </S.ModalResultTextContainer>
-            )}
+          {cepData.length > 0 &&
+            cepData.map((item) => {
+              return (
+                <CepCard
+                  cep={item.cep}
+                  street={item.logradouro}
+                  complement={item.complemento}
+                  neighborhood={item.bairro}
+                  city={item.localidade}
+                  state={item.uf}
+                />
+              );
+            })}
 
-            <S.ModalButtonContainer>
-              <Button
-                onClick={() => {
-                  setShowResultModal(false);
-                }}
-                variant="primary"
-              >
-                OK
-              </Button>
-            </S.ModalButtonContainer>
-          </S.SearchResultModal>
-        </S.SearchResultModalOuterContainer>
-      )}
-    </S.Container>
+          <S.ButtonsContainer>
+            <Button
+              type="button"
+              onClick={() => {
+                history.push("/");
+              }}
+              variant="secondary"
+            >
+              Voltar
+            </Button>
+
+            <Button
+              onClick={(e) => {
+                e.preventDefault();
+                makeCEPRequest();
+              }}
+              variant="primary"
+              disabled={isStreetDisabled}
+            >
+              Pesquisar
+            </Button>
+          </S.ButtonsContainer>
+        </S.Form>
+        <SeparatorLine />
+      </S.Container>
+    </>
   );
 };
 

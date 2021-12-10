@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import * as S from "./styles";
 import axios from "axios";
 
-import LoadingSpinner from "../../components/LoadingSpinner";
+import LoadingScreen from "../../components/LoadingScreen";
 import SearchNewAddress from "../../modules/SearchNewAddress";
 import SearchAddressResult from "../../modules/SearchAddressResult";
 
@@ -39,11 +39,7 @@ const SearchAddress = () => {
 
   return (
     <>
-      {loading && (
-        <S.LoadingScreen>
-          <LoadingSpinner />
-        </S.LoadingScreen>
-      )}
+      {loading && <LoadingScreen />}
 
       {showModule === "SearchNewAddress" && !loading && <SearchNewAddress />}
 

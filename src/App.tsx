@@ -22,13 +22,13 @@ function App() {
             <Home />
           </Route>
 
-          <Route exact path="/searchAddress">
+          <Route exact path="/buscarEndereco">
             <SearchAddressContextProvider>
               <SearchAddress />
             </SearchAddressContextProvider>
           </Route>
 
-          <Route exact path="/searchCep">
+          <Route exact path="/buscarCep">
             <SearchCEP />
           </Route>
         </Switch>

@@ -36,7 +36,7 @@ export const Loader = styled.div`
   &:before {
     width: 5.2em;
     height: 10.2em;
-    background-color: ${Colors.background};
+    background-color: ${Colors.background}99;
     border-radius: 10.2em 0 0 10.2em;
     top: -0.1em;
     left: -0.1em;
@@ -49,7 +49,7 @@ export const Loader = styled.div`
   &:after {
     width: 5.2em;
     height: 10.2em;
-    background-color: ${Colors.background};
+    background-color: ${Colors.background}99;
     border-radius: 0 10.2em 10.2em 0;
     top: -0.1em;
     left: 4.9em;
@@ -58,4 +58,22 @@ export const Loader = styled.div`
     -webkit-animation: ${load2} 2s infinite ease;
     animation: ${load2} 2s infinite ease;
   }
+`;
+
+export const Container = styled.div`
+  display: flex;
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 100vw;
+  height: 100vh;
+
+  background-color: ${Colors.background}99;
+
+  z-index: 999;
 `;

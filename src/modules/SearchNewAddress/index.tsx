@@ -7,8 +7,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { AnyObject } from "yup/lib/object";
-import Title from "../../components/Title";
 import { useSearchAddressContext } from "../../contexts/SearchAddressContext";
+import Breadcrumber from "../../components/Breadcrumber";
 
 interface ISearchNewAddressProps {}
 
@@ -44,20 +44,18 @@ const SearchNewAddress = ({}: ISearchNewAddressProps) => {
     <S.Container>
       <SeparatorLine />
 
-      <S.BreadCrumb>
-        <Title
-          content="Início"
-          size={0.75}
-          variant="h4"
-          onClick={() => {
-            history.push("/");
-          }}
-          decoration="link"
-        />
-
-        <S.BreadCrumbArrow>&gt;</S.BreadCrumbArrow>
-        <S.BreadCrumbResult>Buscar Endereço</S.BreadCrumbResult>
-      </S.BreadCrumb>
+      <Breadcrumber
+        data={[
+          {
+            title: "Início",
+            link: "/",
+          },
+          {
+            title: "Buscar Endereço",
+            link: ".",
+          },
+        ]}
+      />
 
       <S.Form>
         <Controller

@@ -27,7 +27,7 @@ const Home = () => {
         <Button
           variant="primary"
           onClick={() => {
-            history.push("searchAddress");
+            history.push("buscarEndereco");
           }}
         >
           Buscar Endereço
@@ -36,7 +36,7 @@ const Home = () => {
         <Button
           variant="primary"
           onClick={() => {
-            history.push("searchCep");
+            history.push("buscarCep");
           }}
         >
           Buscar Cep
