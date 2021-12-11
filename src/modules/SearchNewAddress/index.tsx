@@ -10,8 +10,6 @@ import { AnyObject } from "yup/lib/object";
 import { useSearchAddressContext } from "../../contexts/SearchAddressContext";
 import Breadcrumber from "../../components/Breadcrumber";
 
-interface ISearchNewAddressProps {}
-
 const schema = yup.object().shape({
   cep: yup
     .string()
@@ -20,7 +18,7 @@ const schema = yup.object().shape({
     .required("Digite o CEP."),
 });
 
-const SearchNewAddress = ({}: ISearchNewAddressProps) => {
+const SearchNewAddress = () => {
   const history = useHistory();
 
   const { setShowModule, setCep, errorMessage } = useSearchAddressContext();

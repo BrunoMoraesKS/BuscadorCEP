@@ -4,14 +4,10 @@ import Header from "../components/Header";
 
 describe("Header", () => {
   render(<Header />);
+
   const headerContainer = screen.getByTestId("headerContainer");
-  const title = screen.findByText("BuscadorCEP!");
 
   test("Should render.", () => {
     expect(headerContainer).toBeInTheDocument();
-  });
-
-  test("Should render the navigation.", () => {
-    expect(title).toBeInTheDocument();
   });
 });

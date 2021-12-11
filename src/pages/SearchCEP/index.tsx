@@ -22,7 +22,6 @@ const SearchCEP = () => {
   const history = useHistory();
 
   const [loading, setLoading] = useState(true);
-  const [showResultModal, setShowResultModal] = useState(false);
   const [showErrorMessage, setShowErrorMessage] = useState(false);
 
   const [cepData, setCepData] = useState<ICEPData[]>([]);
@@ -65,7 +64,10 @@ const SearchCEP = () => {
       setCityData(data);
       setLoading(false);
     };
+
     makeCityRequest();
+
+    setCepData([]);
 
     selectedState && selectedState !== "0"
       ? setIsCityDisabled(false)
@@ -75,30 +77,37 @@ const SearchCEP = () => {
   const makeCEPRequest = async () => {
     setLoading(true);
 
-    const response = await axios.get<ICEPData[]>(
-      `
+    try {
+      const response = await axios.get<ICEPData[]>(
+        `
       https://viacep.com.br/ws/${selectedState}/${selectedCity}/${selectedStreet.replace(
-        /\s+/g,
-        "+"
-      )}/json/
+          /\s+/g,
+          "+"
+        )}/json/
       `
-    );
-    const data = response.data.map((item) => {
-      return item;
-    });
+      );
 
-    response.data.length > 0 ? handleSuccess(data) : handleError();
+      let data = response.data.map((item) => {
+        return item;
+      });
 
-    setLoading(false);
+      console.log({ response });
+
+      response.status === 200 ? handleSuccess(data) : handleError();
+
+      setLoading(false);
+    } catch (err) {
+      handleError();
+    }
   };
 
   const handleError = () => {
     setShowErrorMessage(true);
+    setLoading(false);
     setCepData([]);
   };
   const handleSuccess = (data: ICEPData[]) => {
     setCepData(data);
-    setShowResultModal(true);
     setShowErrorMessage(false);
   };
 
@@ -108,8 +117,6 @@ const SearchCEP = () => {
       : setIsStreetDisabled(true);
     setCepData([]);
   }, [selectedCity]);
-
-  useEffect(() => {}, [selectedState]);
 
   return (
     <>
