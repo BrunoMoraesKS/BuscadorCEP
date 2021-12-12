@@ -11,7 +11,7 @@ const Home = () => {
     <S.Container>
       <SeparatorLine />
 
-      <Title size={2.1} variant="h2" content="Bem vindo ao BuscadorCEP!" />
+      <Title size={2.1} variant="h2" content="Bem-vindo ao BuscadorCEP!" />
 
       <S.WelcomeText>
         O aplicativo BuscadorCEP! permite que você encontre códigos de
