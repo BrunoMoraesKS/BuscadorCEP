@@ -67,3 +67,5 @@ describe("Go back button", () => {
     cy.url().should("eq", Cypress.config().baseUrl);
   });
 });
+
+export {};

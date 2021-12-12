@@ -18,6 +18,6 @@ Para rodar os testes, após clonar e rodar os comandos acima, use:
 <br />
 Para testes unitários, o comando npm test ou yarn test, os testes vão rodar no terminal.
 <br/>
-Para testes end-to-end, o comando npm run cypress ou yarn cypress, uma janela se abrirá, escolha o teste que deseja rodar.
+Para testes end-to-end, o comando npm run cypress:open ou yarn cypress:open, uma janela se abrirá, escolha o teste que deseja rodar. Caso deseje rodar no terminal, use o comando npm run cypress:run ou yarn cypress:run.
 <br />
 Feito com ReactJS.

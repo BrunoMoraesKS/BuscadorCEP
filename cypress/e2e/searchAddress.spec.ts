@@ -1,3 +1,5 @@
+/// <reference path="../support/index.d.ts" />
+
 describe("Run successful address search", () => {
   it("from home page", () => {
     cy.visit("/");
@@ -61,3 +63,5 @@ describe("Go back button", () => {
     cy.url().should("eq", Cypress.config().baseUrl);
   });
 });
+
+export {};
