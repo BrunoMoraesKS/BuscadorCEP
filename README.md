@@ -14,8 +14,6 @@ Clone o projeto, no terminal rode o comando npm install ou o comando yarn, após
 <br/>
 https://buscadorcepks.netlify.app/
 <br/>
-Para rodar os testes, após clonar e rodar os comandos acima, use: 
-<br />
 <h2>Para rodar os testes, após clonar e rodar os comandos acima, use: </h2>
 <br/>
 Para testes end-to-end, o comando npm run cypress:open ou yarn cypress:open, uma janela se abrirá, escolha o teste que deseja rodar. Caso deseje rodar no terminal, use o comando npm run cypress:run ou yarn cypress:run.

@@ -8,6 +8,10 @@ export const Container = styled.div`
   gap: 0.3rem;
 
   margin-bottom: 24px;
+
+  @media print {
+    display: none;
+  }
 `;
 
 export const BreadCrumberActual = styled.h4`
