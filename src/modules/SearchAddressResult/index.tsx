@@ -12,7 +12,6 @@ const SearchAddressResult = ({}: ISearchAddressResultsProps) => {
   const [logradouro, setLogradouro] = useState("");
   const [municipio, setMunicipio] = useState("");
   const [bairro, setBairro] = useState("");
-  const [numero, setNumero] = useState("");
 
   const { setShowModule, data, setErrorMessage, cep } =
     useSearchAddressContext();
@@ -72,16 +71,6 @@ const SearchAddressResult = ({}: ISearchAddressResultsProps) => {
           name="bairro"
           value={data.bairro ? data.bairro : bairro}
           disabled={data.bairro ? true : false}
-        />
-
-        <Input
-          label="Número"
-          onChange={(e) => {
-            setNumero(e.target.value);
-          }}
-          id="numero"
-          name="numero"
-          value={numero}
         />
 
         <Input
