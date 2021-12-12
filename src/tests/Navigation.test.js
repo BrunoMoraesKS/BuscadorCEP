@@ -1,13 +1,12 @@
+import React from "react";
 import "@testing-library/jest-dom/extend-expect";
-import { render, screen, cleanup } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import Navigation from "../components/Navigation";
 
 describe("Navigation", () => {
-  render(<Navigation />);
-
-  const nav = screen.getByTestId("navigation");
-
-  test("Should render.", () => {
-    expect(nav).toBeInTheDocument();
+  it("rendered", () => {
+    render(<Navigation />);
+    expect(screen.getByText("Buscar Endereço")).toBeInTheDocument();
+    expect(screen.getByText("Buscar CEP")).toBeInTheDocument();
   });
 });

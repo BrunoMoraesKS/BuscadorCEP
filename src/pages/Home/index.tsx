@@ -1,9 +1,9 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import * as S from "./styles";
+import Button from "../../components/Button";
 import SeparatorLine from "../../components/SeparatorLine";
 import Title from "../../components/Title";
-import Button from "../../components/Button";
+import * as S from "./styles";
 
 const Home = () => {
   const history = useHistory();

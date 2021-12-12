@@ -1,6 +1,5 @@
 import React from "react";
 import * as S from "./styles";
-import Button from "../Button";
 
 interface IModalProps {
   children: React.ReactNode;

@@ -6,7 +6,7 @@ import * as S from "./styles";
 const Navigation = () => {
   const history = useHistory();
   return (
-    <S.Container data-testid="navigation">
+    <S.Container>
       <Title
         size={1.2}
         content="Buscar Endereço"

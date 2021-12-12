@@ -1,14 +1,14 @@
-import * as S from "./styles";
-import Input from "../../components/Input";
-import Button from "../../components/Button";
-import SeparatorLine from "../../components/SeparatorLine";
-import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
+import * as yup from "yup";
 import { AnyObject } from "yup/lib/object";
-import { useSearchAddressContext } from "../../contexts/SearchAddressContext";
 import Breadcrumber from "../../components/Breadcrumber";
+import Button from "../../components/Button";
+import Input from "../../components/Input";
+import SeparatorLine from "../../components/SeparatorLine";
+import { useSearchAddressContext } from "../../contexts/SearchAddressContext";
+import * as S from "./styles";
 
 const schema = yup.object().shape({
   cep: yup
@@ -67,7 +67,6 @@ const SearchNewAddress = () => {
               name="cep"
               onChange={onChange}
               type="number"
-              data-testid="cepInput"
             />
           )}
           name="cep"

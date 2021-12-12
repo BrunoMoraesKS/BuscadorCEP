@@ -11,6 +11,7 @@ interface ISelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   label: string;
   required?: boolean;
   data: IData[];
+  placeholder?: string;
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
@@ -19,6 +20,7 @@ const Select = ({
   required,
   onChange,
   data,
+  placeholder,
   ...props
 }: ISelectProps) => {
   return (
@@ -29,7 +31,7 @@ const Select = ({
       <S.SelectContainer>
         <S.Select onChange={onChange} {...props}>
           <S.Option selected value="0">
-            Selecione...
+            {placeholder ? placeholder : "Selecione..."}
           </S.Option>
           {data.map((item: IData) => (
             <S.Option key={item.id} value={item.sigla ? item.sigla : item.nome}>

@@ -1,14 +1,10 @@
-import { useState, useEffect } from "react";
-import * as S from "./styles";
 import axios from "axios";
-
+import { useEffect, useState } from "react";
 import LoadingScreen from "../../components/LoadingScreen";
-import SearchNewAddress from "../../modules/SearchNewAddress";
-import SearchAddressResult from "../../modules/SearchAddressResult";
-
-import { ICEPResponse } from "../../interfaces/SearchAddress";
-
 import { useSearchAddressContext } from "../../contexts/SearchAddressContext";
+import { ICEPResponse } from "../../interfaces/SearchAddress";
+import SearchAddressResult from "../../modules/SearchAddressResult";
+import SearchNewAddress from "../../modules/SearchNewAddress";
 
 const SearchAddress = () => {
   const [loading, setLoading] = useState(false);

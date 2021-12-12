@@ -1,7 +1,7 @@
 import React from "react";
-import * as S from "./styles";
 import { useHistory } from "react-router-dom";
 import Title from "../Title";
+import * as S from "./styles";
 
 interface IData {
   title: string;

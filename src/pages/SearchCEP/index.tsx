@@ -1,17 +1,15 @@
-import { useEffect, useState } from "react";
 import axios from "axios";
-
-import * as S from "./styles";
-import SeparatorLine from "../../components/SeparatorLine";
-import Title from "../../components/Title";
+import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import Input from "../../components/Input";
-import Button from "../../components/Button";
-import Select from "../../components/Select";
-import CepCard from "../../components/CepCard";
 import Breadcrumber from "../../components/Breadcrumber";
-import { IStateData, ICityData, ICEPData } from "../../interfaces/SearchCEP";
+import Button from "../../components/Button";
+import CepCard from "../../components/CepCard";
+import Input from "../../components/Input";
 import LoadingScreen from "../../components/LoadingScreen";
+import Select from "../../components/Select";
+import SeparatorLine from "../../components/SeparatorLine";
+import { ICEPData, ICityData, IStateData } from "../../interfaces/SearchCEP";
+import * as S from "./styles";
 
 interface IData {
   id: number;
@@ -91,9 +89,7 @@ const SearchCEP = () => {
         return item;
       });
 
-      console.log({ response });
-
-      response.status === 200 ? handleSuccess(data) : handleError();
+      response.data.length > 0 ? handleSuccess(data) : handleError();
 
       setLoading(false);
     } catch (err) {
@@ -142,27 +138,35 @@ const SearchCEP = () => {
           <Select
             data={stateData}
             label="Estado"
+            name="state"
+            placeholder="Selecione o estado..."
             onChange={(e: any) => {
               setSelectedState(e.target.value);
             }}
+            data-testid="stateInput"
           />
 
           <Select
             data={cityData}
             label="Cidade"
+            name="city"
+            placeholder="Selecione a cidade..."
             onChange={(e: any) => {
               setSelectedCity(e.target.value);
             }}
             disabled={isCityDisabled}
+            data-testid="cityInput"
           />
 
           <Input
             label="Logradouro"
             placeholder="Digite o logradouro..."
+            name="street"
             onChange={(e) => {
               setSelectedStreet(e.target.value);
             }}
             disabled={isStreetDisabled}
+            data-testid="streetInput"
           />
 
           {showErrorMessage && (
@@ -190,6 +194,7 @@ const SearchCEP = () => {
                 history.push("/");
               }}
               variant="secondary"
+              data-testid="goBackButton"
             >
               Voltar
             </Button>
@@ -201,6 +206,7 @@ const SearchCEP = () => {
               }}
               variant="primary"
               disabled={isStreetDisabled}
+              data-testid="searchButton"
             >
               Pesquisar
             </Button>

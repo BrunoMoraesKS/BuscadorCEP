@@ -1,11 +1,11 @@
 import React from "react";
-import * as S from "./styles";
 import Navigation from "../Navigation";
 import Title from "../Title";
+import * as S from "./styles";
 
 const Header = () => {
   return (
-    <S.Container data-testid="headerContainer">
+    <S.Container>
       <Title size={1.1} content="BuscadorCEP!" />
       <Navigation />
     </S.Container>

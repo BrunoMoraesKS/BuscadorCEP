@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import * as S from "./styles";
-import Modal from "../Modal";
 import Button from "../Button";
+import Modal from "../Modal";
 import Title from "../Title";
+import * as S from "./styles";
 
 interface ICepCardProps {
   neighborhood: string;

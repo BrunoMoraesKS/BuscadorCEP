@@ -1,14 +1,12 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { GlobalStyle } from "./global/GlobalStyles";
-import * as S from "./styles";
-
-import SearchAddressContextProvider from "./contexts/SearchAddressContext";
-
-import Home from "./pages/Home";
-import SearchCEP from "./pages/SearchCEP";
-import SearchAddress from "./pages/SearchAddress";
-import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Header from "./components/Header";
+import SearchAddressContextProvider from "./contexts/SearchAddressContext";
+import { GlobalStyle } from "./global/GlobalStyles";
+import Home from "./pages/Home";
+import SearchAddress from "./pages/SearchAddress";
+import SearchCEP from "./pages/SearchCEP";
+import * as S from "./styles";
 
 function App() {
   return (

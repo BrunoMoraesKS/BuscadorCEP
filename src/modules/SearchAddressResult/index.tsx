@@ -1,17 +1,14 @@
 import { useState } from "react";
-import * as S from "./styles";
-import { useHistory } from "react-router-dom";
-import SeparatorLine from "../../components/SeparatorLine";
-import Input from "../../components/Input";
-import Button from "../../components/Button";
-import Title from "../../components/Title";
-import { useSearchAddressContext } from "../../contexts/SearchAddressContext";
 import Breadcrumber from "../../components/Breadcrumber";
+import Button from "../../components/Button";
+import Input from "../../components/Input";
+import SeparatorLine from "../../components/SeparatorLine";
+import { useSearchAddressContext } from "../../contexts/SearchAddressContext";
+import * as S from "./styles";
 
 interface ISearchAddressResultsProps {}
 
 const SearchAddressResult = ({}: ISearchAddressResultsProps) => {
-  const history = useHistory();
   const [logradouro, setLogradouro] = useState("");
   const [municipio, setMunicipio] = useState("");
   const [bairro, setBairro] = useState("");
