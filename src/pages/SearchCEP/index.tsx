@@ -177,6 +177,7 @@ const SearchCEP = () => {
             cepData.map((item) => {
               return (
                 <CepCard
+                  key={item.cep}
                   cep={item.cep}
                   street={item.logradouro}
                   complement={item.complemento}

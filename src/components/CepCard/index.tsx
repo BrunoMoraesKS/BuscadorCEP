@@ -46,8 +46,6 @@ const CepCard = ({
         <S.LeftColumn>
           <S.Title>CEP: </S.Title>
 
-          <S.Title>Localidade: </S.Title>
-
           {neighborhood && <S.Title>Bairro: </S.Title>}
 
           {street && <S.Title>Logradouro: </S.Title>}
@@ -55,10 +53,6 @@ const CepCard = ({
 
         <S.RightColumn>
           <S.Result> {cep}</S.Result>
-
-          <S.Result>
-            {city} - {state}
-          </S.Result>
 
           {neighborhood && <S.Result>{neighborhood}</S.Result>}
 

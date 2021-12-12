@@ -20,7 +20,11 @@ const Breadcrumber = ({ data }: IBreadcrumberProps) => {
     <S.Container>
       {data.map((item, index) => {
         if (index === lastItem - 1) {
-          return <S.BreadCrumberActual>{item.title}</S.BreadCrumberActual>;
+          return (
+            <S.BreadCrumberActual key={index}>
+              {item.title}
+            </S.BreadCrumberActual>
+          );
         }
         return (
           <>
